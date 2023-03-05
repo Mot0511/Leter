@@ -1,0 +1,53 @@
+.item{
+    width: 38%;
+    height: 50px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    margin-top: 20px;
+    display: flex;
+    position: relative;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+}
+a{
+    text-decoration: none;
+}
+.item:hover{
+    background-color: #1f1f1f;
+}
+.avatar{
+    width: 40px;
+    height: 40px;
+    background-color: grey;
+    border-radius: 20px;
+    position: relative;
+    top: 5px;
+    left: 5px;
+}
+.name{
+    margin-top: 8px;
+    margin-left: 20px;
+    font-size: 20px;
+}
+.login{
+    color: grey;
+    margin-top: 12px;
+    margin-left: 10px;
+}
+.info{
+    display: flex;
+}
+.btns{
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
+    position: absolute;
+    right: 0;
+}
+button{
+    background: none;
+    width: 100%;
+    border-radius: 10px;
+    border: 0;
+}
