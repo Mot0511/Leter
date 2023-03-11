@@ -10,7 +10,7 @@ const Menu = () => {
     const [cookie, setCookie, removeCookie] = useCookies()
     const nav = useNavigate()
     useEffect(() => {
-        console.log(cookie);
+
     }, [])
     const exit = () => {
         const auth = getAuth()

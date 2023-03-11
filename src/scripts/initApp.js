@@ -8,7 +8,8 @@ const init = () => {
         storageBucket: "leter-c9547.appspot.com",
         messagingSenderId: "906396413843",
         appId: "1:906396413843:web:cca0f79575c1bf42c7c266",
-        measurementId: "G-0T2DB8N8L5"
+        measurementId: "G-0T2DB8N8L5",
+        databaseURL: "https://leter-c9547-default-rtdb.firebaseio.com/",
     })
 
     return app
