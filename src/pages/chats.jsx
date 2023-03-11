@@ -19,6 +19,10 @@ const Chats = () => {
     const dbr = getDatabase(app)
 
     const [chat, setChat] = useState([])
+    const [chatid, setChatid] = useState('')
+
+    const [users, setUsers] = useState([])
+    const [chats, setChats] = useState([])
 
     useEffect(() => {
         onValue(ref(dbr, 'chats/0/chat/'), (snapshot) => {
@@ -32,8 +36,33 @@ const Chats = () => {
         });
     }, [])
     useMemo(() => {
+        const getData = async () => {
+            const logins = []
+            const chats = []
+            const users = []
+            const data = await getDoc(doc(db, 'users', cookie.login))
+            data.data().chats.map(chat => {
+                logins.push(chat.user)
+                chats.push(chat.chatid)
+            })
+            const usersSnap = await getDocs(query(collection(db, 'users'), where('login', 'in', logins)))
+            usersSnap.forEach(user => {
+                users.push({login: user.data().login, surname: user.data().surname, lastname: user.data().lastname})
+            })
+            setUsers(users)
+            setChats(chats)
+
+        }
+        getData()
+
+
+    }, [])
+
+    const showchat = (chatid) => {
+
+        setVisible(true)
         const dbRef = ref(getDatabase())
-        get(child(dbRef, 'chats/0/chat/'))
+        get(child(dbRef, `chats/${chatid}/chat/`))
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     setChat(snapshot.val())
@@ -44,12 +73,6 @@ const Chats = () => {
             }).catch(err => {
             console.log(err);
         })
-
-    }, [])
-
-    const showchat = () => {
-        setVisible(true)
-
     }
 
     const send = (text) => {
@@ -59,10 +82,21 @@ const Chats = () => {
         setChat(newMessages)
     }
 
+    const getPeople = () => {
+        const content = []
+        for (let i = 0; i < chat.length; i++){
+            content.push(<Person2 surname={users[i].surname} lastname={users[i].lastname} login={users[i].login} chatid={chats[0]} callback={showchat}/>)
+        }
+        return content
+    }
+
     return (
         <div className={cl.chats}>
             <h2>Сообщения</h2>
-            <Person2 surname={'Matvey2'} lastname={'Suvorov2'} login={'login2'} callback={showchat}/>
+            {
+                getPeople()
+            }
+
             {
                 visible
                     ? <Messages chat={chat} send={send} />
