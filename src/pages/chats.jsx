@@ -33,15 +33,7 @@ const Chats = () => {
         if (!cookie.login) {
             nav('/login')
         }
-        onValue(ref(dbr, `chats/${chatid}/chat/`), (snapshot) => {
-            if (!snapshot.val()) {
-                setChat([])
-            }
-            else{
-                setChat(snapshot.val())
-            }
 
-        });
     }, [])
     useMemo(async () => {
         const logins = []
@@ -64,9 +56,22 @@ const Chats = () => {
 
 
     }, [])
+    const listen = (chatid) => {
+        onValue(ref(dbr, `chats/${chatid}/chat/`), (snapshot) => {
+            if (!snapshot.val()) {
+                setChat([])
+                console.log(1);
+            }
+            else{
+                console.log('New message '+chatid);
+                setChat(snapshot.val())
 
+            }
+
+        });
+    }
     const showchat = (chatid) => {
-        setChatid(chatid)
+        // setChatid(chatid)
         setChat([])
         setVisible(true)
         setIsLoading(true)
@@ -75,17 +80,17 @@ const Chats = () => {
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     setIsLoading(false)
-                    setChat(snapshot.val())
 
                 }
                 else {
                     setIsLoading(false)
                     setChat([])
-                    console.log(`chats/${chatid}/chat/`);
                 }
             }).catch(err => {
             console.log(err);
         })
+        setChatid(chatid)
+        listen(chatid)
     }
 
     const send = (text) => {
