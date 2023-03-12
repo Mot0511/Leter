@@ -32,7 +32,7 @@ const Menu = () => {
                     : <Link to={`/login`}><Mybutton text={'Профиль'} /></Link>
             }
 
-            <Link to={`/chats/${cookie.login}`}><Mybutton text={'Сообщения'} /></Link>
+            <Link to={`/chats/`}><Mybutton text={'Сообщения'} /></Link>
             <Link to={`/friends/${cookie.login}`}><Mybutton text={'Друзья'} /></Link>
             <div className={cl.bottom}>
                 {
@@ -43,7 +43,7 @@ const Menu = () => {
                             <Link to={'/register'}><Mybutton text={'Регистрация'} /></Link>
                         </div>
                 }
-</div>
+            </div>
         </div>
     );
 };

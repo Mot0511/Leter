@@ -24,7 +24,10 @@ const Messages = ({chat, send}) => {
             </div>
             <div className={cl.inputs}>
                 <Myinput text={'Собщение'} value={text} onChange={e => setText(e.target.value)} />
-                <Mybutton text={'Отправить'} onClick={() => send(text)} />
+                <Mybutton text={'Отправить'} onClick={() => {
+
+                    send(text)
+                }} />
             </div>
         </div>
     );

@@ -33,7 +33,8 @@ const Register = () => {
                     lastname: lastName,
                     email: email,
                     countFriends: 0,
-                    friends: []
+                    friends: [],
+                    chats: []
                 })
 
                 nav(`/profile/${login}`)

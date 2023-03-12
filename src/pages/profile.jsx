@@ -8,6 +8,7 @@ import {useCookies} from "react-cookie";
 import {useNavigate, Link} from "react-router-dom";
 import Loading from '../components/loading/loading'
 import addFriend from "../scripts/addFriend";
+import createChat from "../scripts/createChat";
 
 const Profile = (props) => {
     const app = initApp()
@@ -54,7 +55,7 @@ const Profile = (props) => {
                     {
                         cookie.login !== login
                             ? <><Mybutton text={'Добавить в друзья'} onClick={() => addFriend(cookie.login, login, () => console.log('Friends added'))} />
-                                <Mybutton text={'Написать соообщение'} /></>
+                                <Mybutton text={'Написать соообщение'} onClick={() => createChat(cookie.login, login, () => nav(`/chats/`))} /></>
                             : <><Mybutton text={'Опубликовать фото'} />
                                 <Mybutton text={'Настройка профиля'} /></>
                     }

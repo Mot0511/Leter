@@ -1,9 +1,9 @@
 import React from 'react'
 import cl from './loading.module.css'
 
-const Loading = () => {
+const Loading = (props) => {
     return (
-        <div className={cl.container}>
+        <div className={cl.container} {...props}>
             <div className={cl.loading}>
                 <div>
 

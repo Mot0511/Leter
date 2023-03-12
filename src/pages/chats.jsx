@@ -9,10 +9,14 @@ import {useCookies} from "react-cookie";
 import initApp from "../scripts/initApp";
 import Messages from "../components/messages/messages";
 import forObjects from "../scripts/forObjects";
+import Loading from "../components/loading/loading";
+import {useNavigate} from "react-router-dom";
 
 const Chats = () => {
     let [cookie] = useCookies()
-    const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+
 
     const app = initApp()
     const db = getFirestore(app)
@@ -22,10 +26,14 @@ const Chats = () => {
     const [chatid, setChatid] = useState('')
 
     const [users, setUsers] = useState([])
-    const [chats, setChats] = useState([])
+    const nav = useNavigate()
+
 
     useEffect(() => {
-        onValue(ref(dbr, 'chats/0/chat/'), (snapshot) => {
+        if (!cookie.login) {
+            nav('/login')
+        }
+        onValue(ref(dbr, `chats/${chatid}/chat/`), (snapshot) => {
             if (!snapshot.val()) {
                 setChat([])
             }
@@ -35,40 +43,45 @@ const Chats = () => {
 
         });
     }, [])
-    useMemo(() => {
-        const getData = async () => {
-            const logins = []
-            const chats = []
-            const users = []
-            const data = await getDoc(doc(db, 'users', cookie.login))
-            data.data().chats.map(chat => {
-                logins.push(chat.user)
-                chats.push(chat.chatid)
-            })
-            const usersSnap = await getDocs(query(collection(db, 'users'), where('login', 'in', logins)))
-            usersSnap.forEach(user => {
-                users.push({login: user.data().login, surname: user.data().surname, lastname: user.data().lastname})
-            })
-            setUsers(users)
-            setChats(chats)
-
-        }
-        getData()
+    useMemo(async () => {
+        const logins = []
+        const chats = []
+        const users = []
+        setIsLoading(true)
+        const data = await getDoc(doc(db, 'users', cookie.login))
+        data.data().chats.map(chat => {
+            logins.push(chat.user)
+            chats.push(chat.chatid)
+        })
+        let usersSnap = await getDocs(query(collection(db, 'users'), where('login', 'in', logins)))
+        let i = 0
+        usersSnap.forEach(user => {
+            users.push({login: user.data().login, surname: user.data().surname, lastname: user.data().lastname, chatid: chats[i]})
+            i++
+        })
+        setIsLoading(false)
+        setUsers(users)
 
 
     }, [])
 
     const showchat = (chatid) => {
-
+        setChatid(chatid)
+        setChat([])
         setVisible(true)
+        setIsLoading(true)
         const dbRef = ref(getDatabase())
         get(child(dbRef, `chats/${chatid}/chat/`))
             .then((snapshot) => {
                 if (snapshot.exists()) {
+                    setIsLoading(false)
                     setChat(snapshot.val())
+
                 }
                 else {
-                    console.log('No data available')
+                    setIsLoading(false)
+                    setChat([])
+                    console.log(`chats/${chatid}/chat/`);
                 }
             }).catch(err => {
             console.log(err);
@@ -76,25 +89,23 @@ const Chats = () => {
     }
 
     const send = (text) => {
-        console.log(chat);
         const newMessages = [...chat, [cookie.login, text]]
-        set(ref(dbr, 'chats/0/chat/'), newMessages);
+        set(ref(dbr, `chats/${chatid}/chat/`), newMessages);
         setChat(newMessages)
     }
 
-    const getPeople = () => {
-        const content = []
-        for (let i = 0; i < chat.length; i++){
-            content.push(<Person2 surname={users[i].surname} lastname={users[i].lastname} login={users[i].login} chatid={chats[0]} callback={showchat}/>)
-        }
-        return content
-    }
 
     return (
         <div className={cl.chats}>
             <h2>Сообщения</h2>
+
             {
-                getPeople()
+                isLoading
+                    ? <Loading />
+                    : users.map(user => {
+                        return <Person2 surname={user.surname} lastname={user.lastname} login={user.login} chatid={user.chatid} callback={showchat}/>
+                    })
+
             }
 
             {
