@@ -1,0 +1,32 @@
+.mobileMenu{
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 40px;
+    background-color: black;
+    border-top: 1px solid white;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+}
+.mobileMenu img{
+    width: 30px;
+    height: 30px;
+}
+.mobileMenu p{
+    font-size: 12px;
+    text-align: center;
+}
+.item{
+    margin-right: 20px;
+
+}
+.logout{
+    margin-left: 20px;
+}
+@media screen and (min-width: 992px){
+    .mobileMenu{
+        display: none;
+    }
+}

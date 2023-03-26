@@ -15,3 +15,8 @@
 h1{
     text-align: center;
 }
+@media screen and (max-width: 920px){
+    .login{
+        transform: translateY(-50%);
+    }
+}

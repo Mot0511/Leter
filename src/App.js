@@ -8,13 +8,15 @@ import Register from "./pages/register";
 import {useCookies} from "react-cookie";
 import Friends from './pages/friends';
 import Chats from "./pages/chats";
+import MobileMenu from "./components/mobileMenu/mobileMenu";
 
 const App = () => {
     return (
         <BrowserRouter>
+            <MobileMenu/>
             <div className={'container-fluid main'} style={{minHeight: '100vh'}}>
                 <div className={'row'} style={{minHeight: '100vh'}}>
-                    <div className={'menu col-lg-2'} style={{minHeight: '100vh'}}>
+                    <div className={'menu col-lg-2 leftColumn'}>
                         <Menu />
                     </div>
                     <div className={'col-lg-10 content'}>

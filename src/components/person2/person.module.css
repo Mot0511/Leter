@@ -1,5 +1,4 @@
 .item{
-    width: 38%;
     height: 50px;
     border-radius: 10px;
     transition: all 0.3s;
@@ -8,6 +7,7 @@
     position: relative;
     margin-bottom: 0;
     padding-bottom: 10px;
+    flex-direction: row;
 }
 a{
     text-decoration: none;
@@ -36,12 +36,12 @@ a{
 }
 .info{
     display: flex;
+    width: 85%;
 }
 .btns{
-    height: 50px;
+    height: 40px;
     display: flex;
     justify-content: flex-end;
-    width: 50%;
     position: absolute;
     right: 0;
 }
@@ -50,4 +50,12 @@ button{
     width: 100%;
     border-radius: 10px;
     border: 0;
+}
+@media screen and (max-width: 920px){
+    .item .name{
+        font-size: 15px;
+    }
+    .item{
+        height: 70px;
+    }
 }

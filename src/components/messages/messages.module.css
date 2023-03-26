@@ -1,14 +1,12 @@
 .messages{
     border-left: 1px solid white;
     width: 50%;
-    height: 100%;
-    position: fixed;
-    right: 0;
-    top: 0;
+    height: 100vh;
+    margin-top: -20px;
 }
 .mess{
     width: 200px;
-    height: 70px;
+
     border-radius: 10px;
     background: #3b3b3b;
     margin: 10px;
@@ -16,7 +14,6 @@
 }
 .user{
     color: lightgrey;
-
 }
 .text{
     margin-top: -10px;
@@ -39,4 +36,29 @@
 .inputs button{
     width: 15%;
     height: 50px;
+}
+.user{
+    display: flex;
+}
+.user h3{
+    margin-top: 15px;
+    margin-left: 15px;
+}
+@media screen and (max-width: 920px){
+    .messages{
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background: black;
+        border-left: 0;
+    }
+    .inputs{
+        margin-top: -85px;
+    }
+    .inputs input{
+        width: 70%;
+    }
+    .inputs button{
+        width: 30%;
+    }
 }

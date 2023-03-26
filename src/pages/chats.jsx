@@ -17,7 +17,6 @@ const Chats = () => {
     const [visible, setVisible] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
 
-
     const app = initApp()
     const db = getFirestore(app)
     const dbr = getDatabase(app)
@@ -33,7 +32,6 @@ const Chats = () => {
         if (!cookie.login) {
             nav('/login')
         }
-
     }, [])
     useMemo(async () => {
         const logins = []
@@ -80,7 +78,6 @@ const Chats = () => {
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     setIsLoading(false)
-
                 }
                 else {
                     setIsLoading(false)
@@ -102,20 +99,23 @@ const Chats = () => {
 
     return (
         <div className={cl.chats}>
-            <h2>Сообщения</h2>
 
-            {
-                isLoading
-                    ? <Loading />
-                    : users.map(user => {
-                        return <Person2 surname={user.surname} lastname={user.lastname} login={user.login} chatid={user.chatid} callback={showchat}/>
-                    })
+            <div className={cl.list}>
+                <h2>Сообщения</h2>
+                {
+                    isLoading
+                        ? <Loading />
+                        : users.map(user => {
+                            return <Person2 surname={user.surname} lastname={user.lastname} login={user.login} chatid={user.chatid} callback={showchat}/>
+                        })
 
-            }
+                }
+            </div>
+
 
             {
                 visible
-                    ? <Messages chat={chat} send={send} />
+                    ? <Messages chat={chat} send={send} setVisible={setVisible} />
                     : <></>
             }
 

@@ -3,14 +3,25 @@ import cl from './messages.module.css'
 import Myinput from "../myinput/myinput";
 import Mybutton from "../mybutton/mybutton";
 import forObjects from "../../scripts/forObjects";
+import Person2 from "../person2/person";
 
-const Messages = ({chat, send}) => {
+import sendIcon from '../../img/send.png'
+import back from '../../img/back.png'
+
+
+const Messages = ({chat, send, setVisible}) => {
     const [text, setText] = useState()
     if (!chat) {
         chat = []
     }
     return (
         <div className={cl.messages}>
+            <div className={cl.user}>
+                <Mybutton onClick={() => {
+                    setVisible(false)
+                }} style={{width: '50px'}}><img width={'30px'} src={back} alt=""/></Mybutton>
+                <h3>Сообщения</h3>
+            </div>
             <div className={cl.chat}>
             {
 
@@ -24,10 +35,9 @@ const Messages = ({chat, send}) => {
             </div>
             <div className={cl.inputs}>
                 <Myinput text={'Собщение'} value={text} onChange={e => setText(e.target.value)} />
-                <Mybutton text={'Отправить'} onClick={() => {
-
+                <Mybutton onClick={() => {
                     send(text)
-                }} />
+                }}><img width={'40px'} height={"40px"} src={sendIcon} alt=""/></Mybutton>
             </div>
         </div>
     );

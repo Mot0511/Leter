@@ -7,8 +7,12 @@
 }
 .bottom{
     width: 100%;
-    right: 10px;
     justify-content: center;
     right: 5px;
     margin-top: 50px;
+}
+@media screen and (max-width: 992px){
+    .menu{
+        display: none;
+    }
 }

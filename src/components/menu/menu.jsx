@@ -9,9 +9,7 @@ import login from "../../pages/login";
 const Menu = () => {
     const [cookie, setCookie, removeCookie] = useCookies()
     const nav = useNavigate()
-    useEffect(() => {
 
-    }, [])
     const exit = () => {
         const auth = getAuth()
         signOut(auth)
