@@ -44,3 +44,8 @@ a{
     position: absolute;
     right: 0;
 }
+@media screen and (max-width: 920px){
+    .item{
+        width: 100%;
+    }
+}
