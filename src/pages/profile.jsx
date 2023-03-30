@@ -11,6 +11,9 @@ import friends from "../scripts/friends";
 import createChat from "../scripts/createChat";
 import Person from "../components/person2/person";
 
+import back from '../img/back.png'
+import Requests from "../components/requests/requests";
+
 const Profile = (props) => {
     const app = initApp()
     const db = getFirestore(app)
@@ -29,8 +32,11 @@ const Profile = (props) => {
 
     const nav = useNavigate()
     const [isVisible, setIsVisible] = useState(true)
+    const [isRequests, setIsRequests] = useState(false)
+
 
     useMemo(() => {
+
         const getData = async () => {
             const temp = []
             const data = await getDoc(doc(db, 'users', login))
@@ -116,22 +122,23 @@ const Profile = (props) => {
                         </div></Link>
                     </div>
 
+                    {requests.length
+                        ? window.innerWidth <= 920
+                            ? <Mybutton onClick={() => setIsRequests(true)}>{requests.length} заявок в друзья</Mybutton>
+                            : <></>
+                        : <></>
+                    }
+
                 </div>
                 {
                     requests.length
-                        ? <div className={'requests'}>
-                            <h3>Запросы в друзья</h3>
-                            <hr/>
-                            {
-                                requests.map(req => <Person login={req[0]} surname={req[1]} lastname={req[2]} callback={() => {nav(`/profile/${req[0]}`)} }
-                                    btns={<Mybutton onClick={() => friends(cookie.login, req[0], 'addFriend', res => {
-                                        setRequests(res)
-                                    })} style={{width: 'auto', height: '44px', marginTop: '3px', marginRight: '3px'}} text={'✔'}/>}
-                                />)
-                            }
-
-                        </div>
+                        ? window.innerWidth > 920
+                            ? <Requests requests={requests} setRequests={setRequests} />
+                            : isRequests
+                                ? <Requests requests={requests} setRequests={setRequests} setIsRequests={setIsRequests}/>
+                                : <></>
                         : <></>
+
                 }
 
             </div>
