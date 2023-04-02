@@ -9,11 +9,10 @@
     width: 400px;
 }
 .avatar{
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     background: grey;
     margin-top: 20px;
-    margin-bottom: 140px;
 }
 .info{
     margin-left: 20px;
@@ -21,12 +20,11 @@
     position: relative;
 }
 .friends{
-    width: 230px;
-    height: 180px;
+    width: 150px;
+    height: 130px;
     border-radius: 10px;
     transition: all 0.2s;
-    position: absolute;
-    bottom: 0;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,19 +47,27 @@
     display: flex;
     flex-wrap: wrap;
 }
-.photos div{
+.photo{
     width: 300px;
     height: 300px;
     background-color: grey;
+    background-size: cover;
+    background-position: center;
     margin-right: 10px;
     margin-bottom: 10px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+.photo{
+    position: relative;
+}
+.photo button{
+    position: absolute;
+    bottom: 0;
 }
 @media screen and (max-width: 920px){
     .photos{
         margin-top: 40px;
-    }
-    .info{
-        margin-left: 80px;
     }
     .avatar{
         width: 60px;
@@ -70,22 +76,18 @@
     }
     .friends{
         position: relative;
-        width: 100%;
-        height: 40px;
-        flex-direction: row;
+        width: 60px;
+        height: 60px;
         background-color: #1c1c1c;
-        padding-top: 7px;
+        top: 70px;
+        padding-top: 20px;
     }
     .friends p:nth-of-type(1){
-        font-size: 25px;
-        text-align: center;
-        margin-top: 5px;
+        font-size: 15px;
     }
     .friends p:nth-of-type(2){
-        font-size: 20px;
-        text-align: center;
-        margin-left: 10px;
-        margin-top: 5px;
+        font-size: 12px;
+        margin-top: -15px;
     }
     .requests{
         padding: 10px;

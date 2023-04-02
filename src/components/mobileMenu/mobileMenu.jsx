@@ -15,7 +15,6 @@ const MobileMenu = () => {
     const [cookie, setCookie, removeCookie] = useCookies()
     const nav = useNavigate()
     useEffect(() => {
-        console.log(cookie.login);
     }, [])
     const exit = () => {
         const auth = getAuth()
