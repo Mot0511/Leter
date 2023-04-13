@@ -11,22 +11,16 @@ const Menu = () => {
     const nav = useNavigate()
 
     const exit = () => {
-        const auth = getAuth()
-        signOut(auth)
-            .then(() => {
-                removeCookie('login')
-                nav('/login')
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+        removeCookie('login')
+        nav('/login')
+
     }
 
     return (
         <div className={cl.menu}>
             {
                 cookie.login
-                    ? <Link to={`/profile/${cookie.login}`}><Mybutton text={'Профиль'} /></Link>
+                    ? <a href={`/profile/${cookie.login}`}><Mybutton text={'Профиль'} /></a>
                     : <Link to={`/login`}><Mybutton text={'Профиль'} /></Link>
             }
 

@@ -34,7 +34,7 @@ const MobileMenu = () => {
                 cookie.login
                     ? <>
                         <div className={cl.item}>
-                            <Link to={`/profile/${cookie.login}`}><img src={profile} alt=""/></Link>
+                            <a href={`/profile/${cookie.login}`}><img src={profile} alt=""/></a>
                         </div>
                         <div className={cl.item}>
                             <Link to={`/chats/`}><img src={chat} alt=""/></Link>
