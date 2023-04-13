@@ -26,6 +26,7 @@ const Profile = (props) => {
     if (!login) {
         login = cookie.login
     }
+
     const [surname, setSurname] = useState('')
     const [lastname, setLastname] = useState('')
     const [countFriends, setCountFriends] = useState()
@@ -33,6 +34,10 @@ const Profile = (props) => {
     const [isFriend, setIsFriend] = useState()
     const [isRequested, setIsRequested] = useState()
     const nav = useNavigate()
+    if (!cookie.login) {
+        console.log(1);
+        nav('/login')
+    }
     const [isVisible, setIsVisible] = useState(true)
     const [isAvatar, setIsAvatar] = useState(true)
     const [isRequests, setIsRequests] = useState(false)
@@ -121,9 +126,7 @@ const Profile = (props) => {
             setCountFriends(data.data().friends.length)
 
         }
-        if (!cookie.login) {
-            nav('/login')
-        }
+
 
         getData()
         getAvatar()
@@ -225,7 +228,7 @@ const Profile = (props) => {
                             : <><Mybutton><label for={'uploadImage'}>Опубликовать фото</label></Mybutton>
                                 {
                                     isEditing
-                                        ? <Mybutton text={'Сохраить изменения'} onClick={saveEdits} />
+                                        ? <Mybutton text={'Сохранить изменения'} onClick={saveEdits} />
                                         : <Mybutton text={'Изменить информацию'} onClick={() => setIsEditing(true)} />
                                 }
                             </>

@@ -38,7 +38,7 @@
     height: 50px;
 }
 .user{
-    display: flex;
+    display: none;
 }
 .user h3{
     margin-top: 15px;
@@ -60,5 +60,8 @@
     }
     .inputs button{
         width: 30%;
+    }
+    .user{
+        display: flex;
     }
 }
