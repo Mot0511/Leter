@@ -1,9 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import cl from './person.module.css'
 import Mybutton from "../mybutton/mybutton";
 import {Link} from "react-router-dom";
+import {getDownloadURL, getStorage, ref} from "firebase/storage";
+import initApp from "../../scripts/initApp";
 
-const Person = ({avatar, lastname, login, surname, status}) => {
+const Person = ({lastname, login, surname, status}) => {
+    const app = initApp()
+    const [avatar, setAvatar] = useState()
+    const storage = getStorage(app);
+    useEffect(() => {
+        getDownloadURL(ref(storage, login+'/avatar.png'))
+            .then(url => {
+                setAvatar(url)
+            })
+
+    }, [])
     return (
         <a href={`/profile/${login}`}><div className={cl.item}>
             <div className={cl.info}>

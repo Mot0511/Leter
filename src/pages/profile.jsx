@@ -67,6 +67,7 @@ const Profile = (props) => {
             }).catch((error) => {
                 console.log(error);
             });
+
     }
 
     const getAvatar = () => {
@@ -262,6 +263,7 @@ const Profile = (props) => {
                     : <div className={'photos'}>
                         {
                             images.map(img => <div>
+
                                 <div className={'photo'} style={{backgroundImage: `url(${img})`}}></div>
                                 <Mybutton onClick={() => removePhoto(img)}>Удалить фото</Mybutton>
                             </div>)

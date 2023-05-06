@@ -6,13 +6,12 @@
 }
 .mess{
     width: 200px;
-
     border-radius: 10px;
     background: #3b3b3b;
     margin: 10px;
     padding: 5px;
 }
-.user{
+.login{
     color: lightgrey;
 }
 .text{

@@ -11,11 +11,14 @@ import Messages from "../components/messages/messages";
 import forObjects from "../scripts/forObjects";
 import Loading from "../components/loading/loading";
 import {useNavigate} from "react-router-dom";
+import $ from "jquery";
 
 const Chats = () => {
     let [cookie] = useCookies()
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
+
+
 
     const app = initApp()
     const db = getFirestore(app)
@@ -26,6 +29,7 @@ const Chats = () => {
 
     const [users, setUsers] = useState([])
     const nav = useNavigate()
+
 
 
     useEffect(() => {
@@ -58,7 +62,6 @@ const Chats = () => {
         onValue(ref(dbr, `chats/${chatid}/chat/`), (snapshot) => {
             if (!snapshot.val()) {
                 setChat([])
-                console.log(1);
             }
             else{
                 console.log('New message '+chatid);
@@ -69,7 +72,6 @@ const Chats = () => {
         });
     }
     const showchat = (chatid) => {
-        // setChatid(chatid)
         setChat([])
         setVisible(true)
         setIsLoading(true)
@@ -78,6 +80,8 @@ const Chats = () => {
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     setIsLoading(false)
+                    let chatDiv = $("#chat")
+                    chatDiv.scrollTop(chatDiv.prop('scrollHeight'));
                 }
                 else {
                     setIsLoading(false)
@@ -89,13 +93,14 @@ const Chats = () => {
         setChatid(chatid)
         listen(chatid)
     }
-
     const send = (text) => {
-        const newMessages = [...chat, [cookie.login, text]]
-        set(ref(dbr, `chats/${chatid}/chat/`), newMessages);
-        setChat(newMessages)
-    }
+        if (text){
+            const newMessages = [...chat, [cookie.login, text]]
+            set(ref(dbr, `chats/${chatid}/chat/`), newMessages);
+            showchat(chatid)
+        }
 
+    }
 
     return (
         <div className={cl.chats}>
