@@ -13,7 +13,7 @@ import Person from "../components/person2/person";
 import { getStorage, ref, getDownloadURL, uploadBytes, listAll, deleteObject } from "firebase/storage";
 
 import back from '../img/back.png'
-import Requests from "../components/requests/requests";
+import Requests from  "../components/requests/requests";
 import Myinput from "../components/myinput/myinput";
 
 const Profile = (props) => {
@@ -177,7 +177,7 @@ const Profile = (props) => {
                     <input onChange={uploadImage} type="file" id={'uploadImage'} hidden/>
                     {
                         login === cookie.login
-                            ? <Mybutton style={{width: '150px', height: '60px'}}><label for={"avatarFile"}>Изменить аватарку</label></Mybutton>
+                            ? <div className={'editAvatar'}><Mybutton style={{width: '150px', height: '60px'}}><label for={"avatarFile"}>Изменить аватарку</label></Mybutton></div>
                             : <></>
                     }
 
@@ -265,7 +265,12 @@ const Profile = (props) => {
                             images.map(img => <div>
 
                                 <div className={'photo'} style={{backgroundImage: `url(${img})`}}></div>
-                                <Mybutton onClick={() => removePhoto(img)}>Удалить фото</Mybutton>
+                                {
+                                    cookie.login === login
+                                        ? <Mybutton onClick={() => removePhoto(img)}>Удалить фото</Mybutton>
+                                        : <></>
+                                }
+
                             </div>)
                         }
                     </div>

@@ -11,11 +11,11 @@ import {useCookies} from "react-cookie";
 
 const Register = () => {
     const app = initApp()
-    const [login, setLogin] = useState('Mot0511')
-    const [email, setEmail] = useState('suvorov.matvej9@gmail.com')
-    const [surname, setSurName] = useState('Matvey')
-    const [lastName, setLastName] = useState('Suvorov')
-    const [password, setPassword] = useState('motik0511')
+    const [login, setLogin] = useState('')
+    const [email, setEmail] = useState('')
+    const [surname, setSurName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [cookie, setCookie, removeCookie] = useCookies()
     const nav = useNavigate()

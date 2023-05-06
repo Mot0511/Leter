@@ -18,6 +18,7 @@ a{
     width: 40px;
     height: 40px;
     background-color: grey;
+    background-size: cover;
     border-radius: 20px;
     position: relative;
     top: 5px;

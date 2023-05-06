@@ -15,10 +15,8 @@ import $ from "jquery";
 
 const Chats = () => {
     let [cookie] = useCookies()
-    const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-
-
 
     const app = initApp()
     const db = getFirestore(app)
@@ -29,8 +27,6 @@ const Chats = () => {
 
     const [users, setUsers] = useState([])
     const nav = useNavigate()
-
-
 
     useEffect(() => {
         if (!cookie.login) {
