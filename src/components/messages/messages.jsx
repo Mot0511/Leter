@@ -4,7 +4,6 @@ import Myinput from "../myinput/myinput";
 import Mybutton from "../mybutton/mybutton";
 import forObjects from "../../scripts/forObjects";
 import Person2 from "../person2/person";
-
 import sendIcon from '../../img/send.png'
 import back from '../../img/back.png'
 import $ from 'jquery';
@@ -45,7 +44,7 @@ const Messages = ({chat, send, setVisible}) => {
             }
             </div>
             <div className={cl.inputs}>
-                <Myinput text={'Собщение'} id={'inputText'} value={text} onChange={e => setText(e.target.value)} />
+                <Myinput text={'Собщение'} autocomplete="off" id={'inputText'} value={text} onChange={e => setText(e.target.value)} />
                 <Mybutton onClick={() => {
                     setText('')
                     send(text)

@@ -44,6 +44,9 @@
     margin-left: 15px;
 }
 @media screen and (max-width: 920px){
+    .chat{
+        padding-bottom: 100px;
+    }
     .messages{
         position: absolute;
         width: 100vw;

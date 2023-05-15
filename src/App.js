@@ -9,6 +9,7 @@ import {useCookies} from "react-cookie";
 import Friends from './pages/friends';
 import Chats from "./pages/chats";
 import MobileMenu from "./components/mobileMenu/mobileMenu";
+import Footer from "./components/footer/footer";
 
 const App = () => {
     return (
@@ -20,7 +21,6 @@ const App = () => {
                         <Menu />
                     </div>
                     <div className={'col-lg-10 content'}>
-
                             <Routes>
                                 <Route path={'/'} element={<Profile />} />
                                 <Route path={'/login/'} element={<Login />} />
@@ -29,10 +29,10 @@ const App = () => {
                                 <Route path={'/friends/:login'} element={<Friends />} />
                                 <Route path={'/chats/'} element={<Chats />} />
                             </Routes>
-
                     </div>
                 </div>
             </div>
+            <Footer />
         </BrowserRouter>
     );
 };
